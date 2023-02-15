@@ -2,7 +2,9 @@
 import random
 
 # Our word list for the game
-words = ["process", "thread", "forks", "signal"]
+file = open("wordlist", "r")
+allTheLinesOfTheFile = file.readlines()
+file.close()
 
 # Randomly selecting a word from the word list to be
 # used on this run of the game. Remember we got to do
@@ -11,8 +13,8 @@ words = ["process", "thread", "forks", "signal"]
 
 #selectedWord = words[random.randint(0, len(words) - 1)]
 
-selectedWord = words [random.randint(0, len(words)-1)]
-attempts = 5
+selectedWord = allTheLinesOfTheFile[random.randint(0, len(allTheLinesOfTheFile)-1)].strip()
+attempts = 2
 truthTracker = False
 winningTracker = False
 
@@ -91,18 +93,17 @@ else:
     
 
     
-   
+
 
 
         
 
 
     
-   
+
 
 
     
 
 
 
-   

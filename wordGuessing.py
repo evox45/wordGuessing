@@ -3,6 +3,7 @@ import random
 def main():
     # Our word list for the game
     #opening wordlist supplied by the customer
+    # TODO need to add filter to our file reading
     file = open("wordlist", "r")
     allTheLinesOfTheFile = file.readlines()
     file.close()
@@ -94,7 +95,7 @@ def main():
         if not name.isalpha():
             print("You gave bad bad input")
    
-
+    
     file = open("saved", "a")
     file.write("{}, {}".format(name, scoreCurrent))
     file.close()

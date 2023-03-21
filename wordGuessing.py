@@ -1,24 +1,34 @@
 import random
+import psycopg2
 
 
 def main():
     # Our word list for the game
-    # opening wordlist supplied by the customer
-    # TODO need to add filter to our file reading
-    file = open("wordlist", "r")
-    allTheLinesOfTheFile = file.readlines()
-    file.close()
 
-    # Randomly selecting a word from the word list to be
-    # used on this run of the game. Remember we got to do
-    # - 1 because len() will give us the length of 4, but
-    # the list uses index which starts at 0 and goes to 3 (4 total)
+
+
+    # Connect to your postgres DB
+    conn = psycopg2.connect("dbname=postgres user=postgres password=evox1337")
+
+    # Open a cursor to perform database operations
+    cur = conn.cursor()
+
+    cur.execute("select * from public.words order by random() limit 1;")
+
+    selectedWord = cur.fetchone()[1]
+    print(selectedWord)
+
+
+    conn.close()
+
+
+
+
 
     # selectedWord = words[random.randint(0, len(words) - 1)]
     # selecting a word at random
-    selectedWord = allTheLinesOfTheFile[random.randint(
-        0, len(allTheLinesOfTheFile)-1)].strip()
-    attempts = 2
+    
+    attempts = 4
     truthTracker = False
     winningTracker = False
 

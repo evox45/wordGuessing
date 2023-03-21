@@ -1,8 +1,9 @@
-# importing extra default python functionality/tools for us to use
 import random
+
+
 def main():
     # Our word list for the game
-    #opening wordlist supplied by the customer
+    # opening wordlist supplied by the customer
     # TODO need to add filter to our file reading
     file = open("wordlist", "r")
     allTheLinesOfTheFile = file.readlines()
@@ -13,9 +14,10 @@ def main():
     # - 1 because len() will give us the length of 4, but
     # the list uses index which starts at 0 and goes to 3 (4 total)
 
-    #selectedWord = words[random.randint(0, len(words) - 1)]
-    #selecting a word at random
-    selectedWord = allTheLinesOfTheFile[random.randint(0, len(allTheLinesOfTheFile)-1)].strip()
+    # selectedWord = words[random.randint(0, len(words) - 1)]
+    # selecting a word at random
+    selectedWord = allTheLinesOfTheFile[random.randint(
+        0, len(allTheLinesOfTheFile)-1)].strip()
     attempts = 2
     truthTracker = False
     winningTracker = False
@@ -28,18 +30,18 @@ def main():
     # mask = [False for char in selectedWord]
 
     # We are making a mask to let us know which letters should
-    # or shouldn't be printing out. By default all items in the 
+    # or shouldn't be printing out. By default all items in the
     # List will be false. That means that those letters were not
     # guessed correctly
     mask = []
     for char in selectedWord:
         mask.append(False)
 
-    # Our main game loop. Will not end untill attemps are 0 or they won the game
+    # Our main game loop. Will not end until attempts are 0 or they won the game
     while attempts != 0 and not winningTracker:
         # Printing attempts left
         print("You have {} attempts left".format(attempts))
-        print (scoreCurrent)
+        print(scoreCurrent)
 
         # Printing out an _ or a char based on the mask value
         for index, char in enumerate(selectedWord):
@@ -63,8 +65,7 @@ def main():
             if userInput == char:
                 mask[index] = True
                 truthTracker = True
-                scoreCurrent = scoreCurrent + scoreCorrect
-
+                scoreCurrent += scoreCorrect
 
         # Our logic for seeing if the game has been won or not
         for item in mask:
@@ -73,13 +74,14 @@ def main():
                 break
             else:
                 winningTracker = True
-        
-         # If they guessed incorrectly, deduct an attempt
-        if not truthTracker:
-            attempts = attempts - 1
-            scoreCorrect += scoreIncorrect
 
-        
+        # If they guessed incorrectly, deduct an attempt
+        if not truthTracker:
+            attempts -= 1
+            scoreCurrent += scoreIncorrect
+
+        # Reset the truth tracker to false
+        truthTracker = False
 
     # Printing if we won or not
     if winningTracker:
@@ -91,36 +93,14 @@ def main():
     while not name.isalpha():
         print("Enter name to be saved for highscore list")
         name = input("Enter > ")
-        
+
         if not name.isalpha():
             print("You gave bad bad input")
-   
-    
+
     file = open("saved", "a")
-    file.write("{}, {}".format(name, scoreCurrent))
+    file.write("{}, {}\n".format(name, scoreCurrent))
     file.close()
+
 
 if __name__ == "__main__":
     main()
-
-
-        
-
-
-    
-
-    
-
-
-
-        
-
-
-    
-
-
-
-    
-
-
-
